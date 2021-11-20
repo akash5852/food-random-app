@@ -5,7 +5,7 @@ let Meal = new Schema({
     meal_name: {
         type: String
     },
-    meal_time: {
+    meal_type: {
         type: String
     }
 });
