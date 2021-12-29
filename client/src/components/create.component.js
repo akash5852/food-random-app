@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
 
 const CreateMeal = () => {
     const [mealType, setmealType] = useState('');
     const [submitted, setSubmitted] = useState('');
+    const [mealName, setmealName] = useState('');
 
+    const addMeal = async () =>{
+        const newmeal = {
+            name: mealName,
+            mealType: mealType,
+        }
+        console.log("http://localhost:5000/addMeal",newmeal);
+        await axios.post("http://localhost:5000/addMeal",newmeal);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitted(`this ${mealType} has been submitted`);
+        addMeal();
+        setSubmitted(`${mealName} for ${mealType} has been submitted`);
         setmealType('');
         e.target.reset();
 
@@ -41,7 +52,7 @@ const CreateMeal = () => {
                 </div>
                 <label required>
                     Name:
-                    <input required type="text" name="name" />
+                    <input required type="text" name="name" onChange={(e) => setmealName(e.target.value)}/>
                 </label>
                 <input type="submit" value="Submit" />
             </form>
