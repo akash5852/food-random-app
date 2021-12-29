@@ -1,12 +1,53 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default class CreateMeal extends Component {
-    render() {
-        return (
-            <div>
-                <h1> CREATE MEAL</h1>
-            </div>
-        )
+const CreateMeal = () => {
+    const [mealType, setmealType] = useState('');
+    const [submitted, setSubmitted] = useState('');
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSubmitted(`this ${mealType} has been submitted`);
+        setmealType('');
+        e.target.reset();
+
+
     }
+
+    return (
+        <div>
+            <h1> CREATE MEAL</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="form-check">
+                    <h3>Choose a type of meal:</h3>
+                    <input className="form-check-input" type="radio" name="mealRadios" id="breakfast" required value="option1" onClick={() => setmealType('Breakfast')} />
+
+                    <label className="form-check-label" htmlFor="breakfast">
+                        Breakfast
+                    </label>
+                </div>
+                <div className="form-check">
+                    <input className="form-check-input" type="radio" name="mealRadios" id="lunch" value="option2" onClick={() => setmealType('Lunch')} />
+                    <label className="form-check-label" htmlFor="lunch">
+                        Lunch
+                    </label>
+                </div>
+                <div className="form-check">
+                    <input className="form-check-input" type="radio" name="mealRadios" id="dinner" value="option3" onClick={() => setmealType('Dinner')} />
+                    <label className="form-check-label" htmlFor="dinner">
+                        Dinner
+                    </label>
+                </div>
+                <label required>
+                    Name:
+                    <input required type="text" name="name" />
+                </label>
+                <input type="submit" value="Submit" />
+            </form>
+            <h1>{submitted}</h1>
+        </div>
+    )
 }
+
+export default CreateMeal
