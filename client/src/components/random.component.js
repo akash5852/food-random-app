@@ -7,9 +7,12 @@ const RandomMeal = () => {
   const [randomMeal, setMeal] = useState('');
 
   const getMeal = async () => {
+    try{
     let res = await axios.get(`http://localhost:5000/randomMeal`, { params: { meal_type: mealType } });
     setMeal(res.data);
-    return res.data;
+    }catch(e){
+      console.log(e);
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -23,20 +26,20 @@ const RandomMeal = () => {
     <div>
       <div className="form-check">
         <h3>Choose a type of meal:</h3>
-        <input className="form-check-input" type="radio" name="mealRadios" id="breakfast" value="option1" checked={mealType === 'Breakfast'} onClick={() => setmealType('Breakfast')} />
+        <input className="form-check-input" type="radio" name="mealRadios" id="breakfast" value="option1" onClick={() => setmealType('Breakfast')} />
 
         <label className="form-check-label" htmlFor="breakfast">
           Breakfast
         </label>
       </div>
       <div className="form-check">
-        <input className="form-check-input" type="radio" name="mealRadios" id="lunch" value="option2" checked={mealType === 'Lunch'} onClick={() => setmealType('Lunch')} />
+        <input className="form-check-input" type="radio" name="mealRadios" id="lunch" value="option2" onClick={() => setmealType('Lunch')} />
         <label className="form-check-label" htmlFor="lunch">
           Lunch
         </label>
       </div>
       <div className="form-check">
-        <input className="form-check-input" type="radio" name="mealRadios" id="dinner" value="option3" checked={mealType === 'Dinner'} onClick={() => setmealType('Dinner')} />
+        <input className="form-check-input" type="radio" name="mealRadios" id="dinner" value="option3" onClick={() => setmealType('Dinner')} />
         <label className="form-check-label" htmlFor="dinner">
           Dinner
         </label>
