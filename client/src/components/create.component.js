@@ -13,17 +13,17 @@ const CreateMeal = () => {
             mealType: mealType,
         }
         try {
-            await axios.post("http://localhost:5000/addMeal",newmeal);
+            const res = await axios.post("http://localhost:5000/addMeal",newmeal);
+            setSubmitted(res.data);
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
        
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        addMeal();
-        setSubmitted(`${mealName} for ${mealType} has been submitted`);
+        addMeal(); 
         setmealType('');
         setmealName('');
         e.target.reset();

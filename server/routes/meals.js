@@ -20,15 +20,20 @@ router.route("/addMeal").post(async (req, res) => {
         meal_type: req.body.mealType
     }
     var newMeal = new Meal(data);
-    newMeal.save((err) => {
-        if (err) {
-            console.log("Something went wrong with adding that meal");
-        } else {
-            console.log("Meal added successfully");
-            res.send("Meal Added");
-        }
-    });
-
+    const mealExists = await Meal.exists({ meal_name: req.body.name }, { meal_type: req.body.mealType });
+    if (mealExists){
+        res.send("Sorry but this meal exists");
+        console.log("Meal exists");
+    }else {
+        newMeal.save((err) => {
+            if (err) {
+                console.log("Something went wrong with adding that meal");
+            } else {
+                console.log("Meal added successfully");
+                res.send(`${req.body.name} as a ${req.body.mealType} meal has been added`);
+            }
+        });
+    }
 })
 
 //Gets a random meal from the cluster

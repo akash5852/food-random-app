@@ -18,6 +18,9 @@ class App extends Component {
                 <li className="navbar-item">
                   <Link to="/addMeal" className="nav-link">Create Meal</Link>
                 </li>
+                <li className="navbar-item">
+                  <Link to="/editMeal" className="nav-link">Edit and Delete Meals</Link>
+                </li>
               </ul>
             </div>
           </nav>
