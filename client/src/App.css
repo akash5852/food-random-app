@@ -1,0 +1,20 @@
+
+#fullDiv {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    position: fixed;
+}
+
+#landingcontainer {
+    text-align: center;
+    min-height: 100vh;
+    position: relative;
+    background-image: url('../src/resources/monika-grabkowska-P1aohbiT-EY-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    overflow: hidden;
+}

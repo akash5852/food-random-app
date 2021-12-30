@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from 'react';
 import axios from "axios";
+import './Random.css';
 
 const RandomMeal = () => {
   const [mealType, setmealType] = useState('');
@@ -23,30 +24,15 @@ const RandomMeal = () => {
 
 
   return (
-    <div>
-      <div className="form-check">
-        <h3>Choose a type of meal:</h3>
-        <input className="form-check-input" type="radio" name="mealRadios" id="breakfast" value="option1" onClick={() => setmealType('Breakfast')} />
-
-        <label className="form-check-label" htmlFor="breakfast">
-          Breakfast
-        </label>
-      </div>
-      <div className="form-check">
-        <input className="form-check-input" type="radio" name="mealRadios" id="lunch" value="option2" onClick={() => setmealType('Lunch')} />
-        <label className="form-check-label" htmlFor="lunch">
-          Lunch
-        </label>
-      </div>
-      <div className="form-check">
-        <input className="form-check-input" type="radio" name="mealRadios" id="dinner" value="option3" onClick={() => setmealType('Dinner')} />
-        <label className="form-check-label" htmlFor="dinner">
-          Dinner
-        </label>
+    <div className="text-light" >
+      <div className="d-md-inline form-check text-light">
+        <h1>Can't decide on what to eat?<br/> I can help</h1>
       </div>
 
-      <form onSubmit={handleSubmit} className="form-group">
-        <input type="submit" value="Generate Meal" className="btn btn-primary" />
+      <form onSubmit={handleSubmit} className="d-md-inline form-group">
+        <input type="submit" value="Breakfast" className="m-3 btn btn-primary" onClick={() => setmealType('Breakfast')} />
+        <input type="submit" value="Lunch" className="m-3 btn btn-primary" onClick={() => setmealType('Lunch')} />
+        <input type="submit" value="Dinner" className="m-3 btn btn-primary" onClick={() => setmealType('Dinner')} />
       </form>
       <h1>{randomMeal}</h1>
     </div>
