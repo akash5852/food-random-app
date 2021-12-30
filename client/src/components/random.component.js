@@ -7,10 +7,10 @@ const RandomMeal = () => {
   const [randomMeal, setMeal] = useState('');
 
   const getMeal = async () => {
-    try{
-    let res = await axios.get(`http://localhost:5000/randomMeal`, { params: { meal_type: mealType } });
-    setMeal(res.data);
-    }catch(e){
+    try {
+      let res = await axios.get(`http://localhost:5000/randomMeal`, { params: { meal_type: mealType } });
+      setMeal(res.data);
+    } catch (e) {
       console.log(e);
     }
   }

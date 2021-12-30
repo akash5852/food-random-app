@@ -7,25 +7,25 @@ const CreateMeal = () => {
     const [submitted, setSubmitted] = useState('');
     const [mealName, setmealName] = useState('');
 
-    const addMeal = async () =>{
+    const addMeal = async () => {
         const newmeal = {
             name: mealName,
             mealType: mealType,
         }
         try {
-            const res = await axios.post("http://localhost:5000/addMeal",newmeal);
+            const res = await axios.post("http://localhost:5000/addMeal", newmeal);
             setSubmitted(res.data);
         } catch (err) {
             console.log(err);
         }
-       
+
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        addMeal(); 
-        setmealType('');
+        addMeal();
         setmealName('');
+        setmealType('');
         e.target.reset();
 
 
@@ -57,7 +57,7 @@ const CreateMeal = () => {
                 </div>
                 <label required>
                     Name:
-                    <input required type="text" name="name" onChange={(e) => setmealName(e.target.value)}/>
+                    <input required type="text" name="name" onChange={(e) => setmealName(e.target.value)} />
                 </label>
                 <input type="submit" value="Submit" />
             </form>
