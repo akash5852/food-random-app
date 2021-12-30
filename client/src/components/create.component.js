@@ -12,8 +12,12 @@ const CreateMeal = () => {
             name: mealName,
             mealType: mealType,
         }
-        console.log("http://localhost:5000/addMeal",newmeal);
-        await axios.post("http://localhost:5000/addMeal",newmeal);
+        try {
+            await axios.post("http://localhost:5000/addMeal",newmeal);
+        } catch (err) {
+            console.log(err)
+        }
+       
     }
 
     const handleSubmit = async (e) => {
@@ -21,6 +25,7 @@ const CreateMeal = () => {
         addMeal();
         setSubmitted(`${mealName} for ${mealType} has been submitted`);
         setmealType('');
+        setmealName('');
         e.target.reset();
 
 
