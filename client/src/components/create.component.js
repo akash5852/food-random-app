@@ -24,8 +24,6 @@ const CreateMeal = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         addMeal();
-        setmealName('');
-        setmealType('');
         e.target.reset();
 
 
