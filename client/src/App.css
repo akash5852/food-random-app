@@ -10,9 +10,15 @@
 
 #landingcontainer {
     text-align: center;
+    text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
     min-height: 100vh;
     position: relative;
-    background-image: url('../src/resources/monika-grabkowska-P1aohbiT-EY-unsplash.jpg');
+    
+    background-image: url('../src/resources/monika2.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;

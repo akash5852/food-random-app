@@ -24,17 +24,20 @@ const RandomMeal = () => {
 
 
   return (
-    <div className="text-light" >
-      <div className="d-md-inline form-check text-light">
-        <h1>Can't decide on what to eat?<br/> I can help</h1>
+    <div id ="container" className="text-light" >
+      <div>
+      <div className=" d-md-inline form-check text-light">
+        <h1>Can't decide on what to eat?<br/><p id = "double">I can help</p></h1>
+        <h1 className="pt-3"> Choose a meal type</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="d-md-inline form-group">
-        <input type="submit" value="Breakfast" className="m-3 btn btn-primary" onClick={() => setmealType('Breakfast')} />
-        <input type="submit" value="Lunch" className="m-3 btn btn-primary" onClick={() => setmealType('Lunch')} />
-        <input type="submit" value="Dinner" className="m-3 btn btn-primary" onClick={() => setmealType('Dinner')} />
+        <input type="submit" value="Breakfast" className="m-3 btn btn-primary btn-md" onClick={() => setmealType('Breakfast')} />
+        <input type="submit" value="Lunch" className="m-3 btn btn-primary btn-md" onClick={() => setmealType('Lunch')} />
+        <input type="submit" value="Dinner" className="m-3 btn btn-primary btn-md" onClick={() => setmealType('Dinner')} />
       </form>
       <h1>{randomMeal}</h1>
+    </div>
     </div>
   );
 };

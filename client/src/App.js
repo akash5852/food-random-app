@@ -8,7 +8,7 @@ import RandomMeal from "./components/random.component";
 class App extends Component {
   render() {
     return (
-      <div id = "fullDiv">
+      <div id = "fullDiv" className="middle-align">
       <Router>
           <div id ="landingcontainer">
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -16,11 +16,9 @@ class App extends Component {
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
-                  <Link to="/addMeal" className="nav-link">Create Meal</Link>
+                  <Link to="/addMeal" className="nav-link">Add, Delete or Edit Meals</Link>
                 </li>
-                <li className="navbar-item">
-                  <Link to="/editMeal" className="nav-link">Edit and Delete Meals</Link>
-                </li>
+                
               </ul>
             </div>
           </nav>
