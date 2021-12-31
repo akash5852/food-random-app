@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import './Random.css'
 const CreateMeal = () => {
     const [mealType, setmealType] = useState('');
     const [submitted, setSubmitted] = useState('');
@@ -49,11 +50,12 @@ const CreateMeal = () => {
 
     return (
 
-        <div>
-            <h1> CREATE MEAL</h1>
+        <div id="container" className="text-light">
+
             <form onSubmit={handleSubmit}>
                 <div className="form-check">
-                    <h3>Choose a type of meal:</h3>
+                    <h1>Want to add or remove meals of your own??<br /><p id="double">I can help</p></h1>
+                    <h1 className="pt-3"> Choose a meal type</h1>
                     <input className="form-check-input" type="radio" name="mealRadios" id="breakfast" required value="option1" onClick={() => setmealType('Breakfast')} />
 
                     <label className="form-check-label" htmlFor="breakfast">

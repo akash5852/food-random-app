@@ -25,7 +25,7 @@ const RandomMeal = () => {
 
   return (
     <div id ="container" className="text-light" >
-      <div>
+      <div id ="middle">
       <div className=" d-md-inline form-check text-light">
         <h1>Can't decide on what to eat?<br/><p id = "double">I can help</p></h1>
         <h1 className="pt-3"> Choose a meal type</h1>

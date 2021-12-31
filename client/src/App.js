@@ -8,7 +8,7 @@ import RandomMeal from "./components/random.component";
 class App extends Component {
   render() {
     return (
-      <div id = "fullDiv" className="middle-align">
+      <div id = "fullDiv">
       <Router>
           <div id ="landingcontainer">
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
