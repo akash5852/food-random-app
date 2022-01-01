@@ -91,27 +91,27 @@ const CreateMeal = () => {
                         </label>
                     </div>
                 </div>
-                <div>
-                <div className="pt-3 form-check">
-                    <input required className="btn-check" type="radio" name="crud" id="create" autocomplete="off" onClick={() => setTask('create')} />
-                    <label required className="btn btn-secondary" htmlFor="create">
-                        Create
-                    </label>
-                </div>
+                <div className='pt-3 pb-3 d-flex justify-content-center'>
+                    <div className="form-check">
+                        <input required className="btn-check" type="radio" name="crud" id="create" autocomplete="off" onClick={() => setTask('create')} />
+                        <label required className="btn btn-secondary" htmlFor="create">
+                            Create
+                        </label>
+                    </div>
 
-                <div className="form-check">
-                    <input required className="btn-check" type="radio" name="crud" id="delete" autocomplete="off" onClick={() => setTask('delete')} />
-                    <label required className="btn btn-secondary" htmlFor="delete">
-                        Delete
-                    </label>
-                </div>
+                    <div className="form-check">
+                        <input required className="btn-check" type="radio" name="crud" id="delete" autocomplete="off" onClick={() => setTask('delete')} />
+                        <label required className="btn btn-secondary" htmlFor="delete">
+                            Delete
+                        </label>
+                    </div>
                 </div>
                 <label required>
                     Meal Name:
                     <input required type="text" name="name" onChange={(e) => setmealName(e.target.value)} />
                 </label>
                 <input type="submit" value="Submit" />
-                <h1 ref={updateNotificationRef} >{submitted}</h1>
+                <h1 className='pt-4' ref={updateNotificationRef} >{submitted}</h1>
             </form>
 
         </div>
