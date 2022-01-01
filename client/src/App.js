@@ -12,13 +12,12 @@ class App extends Component {
       <Router>
           <div id ="landingcontainer">
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <Link to="/" className="navbar-brand">Random Meal App</Link>
+            <Link to="/" className="navbar-brand">Meal Idea Generator</Link>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
-                  <Link to="/addMeal" className="nav-link">Add, Delete or Edit Meals</Link>
+                  <Link to="/addMeal" className="nav-link">Add or Delete Meals</Link>
                 </li>
-                
               </ul>
             </div>
           </nav>
