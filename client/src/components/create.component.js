@@ -1,15 +1,32 @@
 //Photo by <a href="https://unsplash.com/@moniqa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Monika Grabkowska</a> on <a href="https://unsplash.com/s/photos/food-photography?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import './Random.css'
 const CreateMeal = () => {
+    const initialState = '';
     const [mealType, setmealType] = useState('');
     const [submitted, setSubmitted] = useState('');
     const [mealName, setmealName] = useState('');
     const [task, setTask] = useState('');
+
+    const updateNotificationRef = useRef();
+
+    useEffect(() => {
+        // Skipping the initial render. TODO: use a better solution from https://stackoverflow.com/questions/53179075/with-useeffect-how-can-i-skip-applying-an-effect-upon-the-initial-render
+        if (submitted === initialState) {
+            return;
+        }
+        updateNotificationRef.current.animate(
+            {
+                opacity: [0, 1]
+            },
+            500
+        );
+    }, [submitted]);
+
 
     const addMeal = async () => {
         const newmeal = {
@@ -51,51 +68,52 @@ const CreateMeal = () => {
     return (
 
         <div id="container" className="text-light">
-
             <form onSubmit={handleSubmit}>
-                <div className="form-check">
-                    <h1>Want to add or remove meals of your own??<br /><p id="double">I can help</p></h1>
-                    <h1 className="pt-3"> Choose a meal type</h1>
-                    <input className="form-check-input" type="radio" name="mealRadios" id="breakfast" required value="option1" onClick={() => setmealType('Breakfast')} />
-
-                    <label className="form-check-label" htmlFor="breakfast">
-                        Breakfast
-                    </label>
+                <h1>Want to add or remove meals of your own??<br /><p id="double">I can help</p></h1>
+                <h1 className="pt-3 pb-3"> Add or remove a meal</h1>
+                <div className='d-inline-flex'>
+                    <div className="form-check">
+                        <input className="btn-check" type="radio" name="mealRadios" id="breakfast" autocomplete="off" required onClick={() => setmealType('Breakfast')} />
+                        <label className="btn btn-secondary" htmlFor="breakfast">
+                            Breakfast
+                        </label>
+                    </div>
+                    <div className="form-check">
+                        <input className="btn-check" type="radio" name="mealRadios" id="lunch" autocomplete="off" required onClick={() => setmealType('Lunch')} />
+                        <label className="btn btn-secondary" htmlFor="lunch">
+                            Lunch
+                        </label>
+                    </div>
+                    <div className="form-check">
+                        <input className="btn-check" type="radio" name="mealRadios" id="dinner" autocomplete="off" required onClick={() => setmealType('Dinner')} />
+                        <label className="btn btn-secondary" htmlFor="dinner">
+                            Dinner
+                        </label>
+                    </div>
                 </div>
-                <div className="form-check">
-                    <input className="form-check-input" type="radio" name="mealRadios" id="lunch" value="option2" onClick={() => setmealType('Lunch')} />
-                    <label className="form-check-label" htmlFor="lunch">
-                        Lunch
-                    </label>
-                </div>
-                <div className="form-check">
-                    <input className="form-check-input" type="radio" name="mealRadios" id="dinner" value="option3" onClick={() => setmealType('Dinner')} />
-                    <label className="form-check-label" htmlFor="dinner">
-                        Dinner
-                    </label>
-                </div>
-
+                <div>
                 <div className="pt-3 form-check">
-                    <input required className="form-check-input" type="radio" name="crud" id="create" value="option1" onClick={() => setTask('create')} />
-                    <label required className="form-check-label" htmlFor="Create">
+                    <input required className="btn-check" type="radio" name="crud" id="create" autocomplete="off" onClick={() => setTask('create')} />
+                    <label required className="btn btn-secondary" htmlFor="create">
                         Create
                     </label>
                 </div>
 
                 <div className="form-check">
-                    <input required className="form-check-input" type="radio" name="crud" id="delete" value="option2" onClick={() => setTask('delete')} />
-                    <label required className="form-check-label" htmlFor="Delete">
+                    <input required className="btn-check" type="radio" name="crud" id="delete" autocomplete="off" onClick={() => setTask('delete')} />
+                    <label required className="btn btn-secondary" htmlFor="delete">
                         Delete
                     </label>
                 </div>
-
+                </div>
                 <label required>
-                    Name:
+                    Meal Name:
                     <input required type="text" name="name" onChange={(e) => setmealName(e.target.value)} />
                 </label>
                 <input type="submit" value="Submit" />
+                <h1 ref={updateNotificationRef} >{submitted}</h1>
             </form>
-            <h1>{submitted}</h1>
+
         </div>
     )
 }
