@@ -1,6 +1,5 @@
 //Photo by <a href="https://unsplash.com/@moniqa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Monika Grabkowska</a> on <a href="https://unsplash.com/s/photos/food-photography?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
-
 import React, { useState, useRef, useEffect } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -34,7 +33,7 @@ const CreateMeal = () => {
             mealType: mealType,
         }
         try {
-            const res = await axios.post("http://localhost:5000/addMeal", newmeal);
+            const res = await axios.post("https://food-random-app.herokuapp.com/addMeal", newmeal);
             setSubmitted(res.data);
         } catch (err) {
             console.log(err);
@@ -44,7 +43,7 @@ const CreateMeal = () => {
 
     const deleteMeal = async () => {
         try {
-            let res = await axios.delete(`http://localhost:5000/deleteMeal`, { params: { meal_name: mealName, meal_type: mealType } });
+            let res = await axios.delete(`https://food-random-app.herokuapp.com/deleteMeal`, { params: { meal_name: mealName, meal_type: mealType } });
             setSubmitted(res.data);
         } catch (err) {
             console.log(err);

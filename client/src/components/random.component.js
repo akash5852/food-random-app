@@ -25,7 +25,7 @@ const RandomMeal = () => {
 
   const getMeal = async () => {
     try {
-      let res = await axios.get(`http://localhost:5000/randomMeal`, { params: { meal_type: mealType } });
+      let res = await axios.get(`https://food-random-app.herokuapp.com/randomMeal`, { params: { meal_type: mealType } });
       setMeal('We recommend you eat: '+ res.data);
     } catch (e) {
       console.log(e);
