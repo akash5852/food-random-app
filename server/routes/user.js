@@ -79,6 +79,8 @@ router.route("/login").post(async (req, res) => {
 })
 
 const verifyJWT = (req, res, next) =>{
+    const token = req.headers["access-token"]?.split(' ')[1]
+
     if(token){
         jwt.verify(token,process.env.PASSPORTSECRET, (err, decoded) => {
             if (err) return res.json({
@@ -96,7 +98,8 @@ const verifyJWT = (req, res, next) =>{
 
 }
 
-router.route("/getUsername",verifyJWT).get(async (req, res) =>{
+router.route("/getUsername").get(async (req, res) =>{
+    verifyJWT(req,res);
     res.json({isLoggedIn: true, username: req.user.username})
 })
 
