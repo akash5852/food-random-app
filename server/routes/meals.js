@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
-let Meal = require("../meal.model");
+let Meal = require("../Models/meal.model.js");
 
 //Gets all meals in the cluster
 router.route("/").get(async (req, res) => {
