@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import CreateMeal from "./components/create.component";
-import RandomMeal from "./components/random.component";
+import CreateMeal from "./components/Create.js";
+import RandomMeal from "./components/Random.js";
 class App extends Component {
   render() {
     return (
