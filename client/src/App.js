@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import CreateMeal from "./components/Create.js";
 import RandomMeal from "./components/Random.js";
+import Register from "./components/Register.js"
+import Login from "./components/Login.js"
 class App extends Component {
   render() {
     return (
@@ -22,6 +24,8 @@ class App extends Component {
             </div>
           </nav>
           <br />
+          <Route exact path="/register" component={Register}/>
+          <Route exact path="/login" component={Login}/>
           <Route path="/addMeal" component={CreateMeal} />
           <Route path="/" exact component={RandomMeal} />
           </div>

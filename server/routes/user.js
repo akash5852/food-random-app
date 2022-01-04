@@ -62,7 +62,7 @@ router.route("/login").post(async (req, res) => {
                     if (err) return res.json({ message: err })
                     return res.json({
                         message: 'Success',
-                        token: "Bearer" + token
+                        token: "Bearer " + token
                     })
                 }
             )
@@ -78,16 +78,18 @@ router.route("/login").post(async (req, res) => {
     }
 })
 
-const verifyJWT = (req, res, next) =>{
+const verifyJWT = (req, res, next) => {
+    // removes 'Bearer` from token
     const token = req.headers["access-token"]?.split(' ')[1]
 
-    if(token){
-        jwt.verify(token,process.env.PASSPORTSECRET, (err, decoded) => {
+    if (token) {
+        console.log(token)
+        jwt.verify(token, process.env.PASSPORTSECRET, (err, decoded) => {
             if (err) return res.json({
-                isLoggedIn: false,
-                message: "Failed to authenticate"
+                isLoggedIn: false, 
+                message: "Failed To Authenticate"
             })
-            req.user = {}
+            req.user = {};
             req.user.id = decoded.id
             req.user.username = decoded.username
             next()
@@ -95,8 +97,11 @@ const verifyJWT = (req, res, next) =>{
     } else {
         res.json({message: "Incorrect Token Given", isLoggedIn: false})
     }
-
 }
+
+router.get("/isUserAuth", verifyJWT, (req, res) => {
+    return res.json({isLoggedIn: true, username: req.user.username})
+})
 
 router.route("/getUsername").get(async (req, res) =>{
     verifyJWT(req,res);
