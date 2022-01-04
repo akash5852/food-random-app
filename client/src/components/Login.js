@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, Redirect } from 'react-router-dom'
 import axios from "axios";
 
 const Login = () => {
@@ -10,13 +10,19 @@ const Login = () => {
         try {
             const res = await axios.get("http://localhost:5000/isUserAuth", {
                 headers: {
-                    "access-token": `${token}` 
-                  }
+                    "access-token": token
+                }
             });
-            console.log(res.data);
+            console.log(JSON.stringify(res.data));
+            let data = res.data;
+            if(data.isLoggedIn){
+                history.push("/")
+            }else{
+                setErrorMessage(data.message)
+            }
 
         } catch (e) {
-            
+            console.log(e)
         }
 
     }
@@ -31,13 +37,13 @@ const Login = () => {
         try {
             const res = await axios.post("http://localhost:5000/login", user);
             let data = res.data;
-            console.log(JSON.stringify(data.message))
+            console.log(data.message);
             setErrorMessage(JSON.stringify(data.message));
             localStorage.setItem("token", data.token);
-            if(data.token){
-                checkValid(data.token);
+            if (data.token) {
+                checkValid(localStorage.getItem("token"));
             }
-            
+
 
         } catch (e) {
             console.log(e);
@@ -59,8 +65,8 @@ const Login = () => {
 
 
 
-    
-    return (
+
+    if()return (
         <div className="text-white flex flex-col h-screen w-screen items-center justify-center">
             <div className="p-5 text-3xl font-extrabold">Login</div>
             <form className="mx-5 flex flex-col w-72" onSubmit={(e) => handleLogin(e)}>
@@ -73,7 +79,7 @@ const Login = () => {
                     <h1>Don't have an account?</h1>
                     <Link className="m-1 px-2 py-1 rounded font-bold text-xl border-2 border-green-400 text-green-400 text-center" to="/register">Register</Link>
                 </div>
-                
+
             </form>
 
         </div>

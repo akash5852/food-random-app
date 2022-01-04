@@ -56,7 +56,7 @@ router.route("/login").post(async (req, res) => {
 
             jwt.sign(
                 payload,
-                process.env.JWT_SECRET,
+                process.env.PASSPORTSECRET,
                 { expiresIn: 86400 },
                 (err, token) => {
                     if (err) return res.json({ message: err })
@@ -83,15 +83,12 @@ const verifyJWT = (req, res, next) => {
     const token = req.headers["access-token"]?.split(' ')[1]
 
     if (token) {
-        console.log(token)
         jwt.verify(token, process.env.PASSPORTSECRET, (err, decoded) => {
-            if (err) return res.json({
-                isLoggedIn: false, 
-                message: "Failed To Authenticate"
-            })
+            if (err) return res.json({isLoggedIn: false, message: "Failed To Authenticate"})
             req.user = {};
             req.user.id = decoded.id
             req.user.username = decoded.username
+            req.user.pfp = decoded.pfp
             next()
         })
     } else {
