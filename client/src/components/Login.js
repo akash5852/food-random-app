@@ -6,6 +6,21 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState("")
     const history = useHistory();
 
+    const checkValid = async (token) => {
+        try {
+            const res = await axios.get("http://localhost:5000/isUserAuth", {
+                headers: {
+                    "access-token": `${token}` 
+                  }
+            });
+            console.log(res.data);
+
+        } catch (e) {
+            
+        }
+
+    }
+
     const handleLogin = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -16,10 +31,13 @@ const Login = () => {
         try {
             const res = await axios.post("http://localhost:5000/login", user);
             let data = res.data;
-       
+            console.log(JSON.stringify(data.message))
             setErrorMessage(JSON.stringify(data.message));
             localStorage.setItem("token", data.token);
-
+            if(data.token){
+                checkValid(data.token);
+            }
+            
 
         } catch (e) {
             console.log(e);
@@ -38,6 +56,10 @@ const Login = () => {
             .catch(err => setErrorMessage(err))
     }, [history])
 
+
+
+
+    
     return (
         <div className="text-white flex flex-col h-screen w-screen items-center justify-center">
             <div className="p-5 text-3xl font-extrabold">Login</div>
