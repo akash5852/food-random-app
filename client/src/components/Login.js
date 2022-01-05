@@ -23,7 +23,7 @@ const Login = () => {
             localStorage.setItem("token", data.token);
             setErrorMessage(data.message);
             if (data.message === "Success") {
-                
+                history.push("/")
             }
         } catch (e) {
             console.log(e);
