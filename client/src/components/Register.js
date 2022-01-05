@@ -16,13 +16,13 @@ const Register = () => {
         try {
             const res = await axios.post("http://localhost:5000/register", user);
             let data = res.data;
-            
+
             setErrorMessage(data.message);
-            
+
             console.log(data.message);
-            if(data.message === "User has been added"){
+            if (data.message === "User has been added") {
                 history.push("/login");
-                history.go(0); 
+                history.go(0);
             }
         } catch (e) {
             console.log(e);
@@ -46,25 +46,31 @@ const Register = () => {
 
     return (
         <div className="text-white flex flex-col h-screen w-screen items-center justify-center">
-            <div className="h2 p-5  ">Register</div>
-            <form className="mx-5 " onSubmit={(e) => handleRegister(e)}>
-                <div className='d-block'>
-                    <label required className="d-inline  m-2" htmlFor="username">Username: </label>
-                    <input required className="d-inline m-2" type="text" name="username" id="username" />
-                    <label required className="d-inline m-2" htmlFor="password">Password: </label>
-                    <input required className="d-inline  m-2" type="password" name="password" id="password" />
-                    <input className="m-1 px-2 py-1 " type="submit" value="Register" />
-                </div>
-                <div>{errorMessage}</div>
-                <div className="justify-content-center">
-                    <div className='d-block'>
-                        <p className="h3 pt-5">Already have an account? </p>
+            <div className="h2 pb-2 text-decoration-underline">Register</div>
+            <form className="d-flex justify-content-center vw-100 " onSubmit={(e) => handleRegister(e)}>
+                <div className='mb-3'>
+                    <div className="mb-3">
+                        <label required for="username" className="form-label">Username</label>
+                        <input required className="form-control" id="username" aria-describedby="username" />
                     </div>
-                    <div className='d-block'>
-                        <Link className="h3 pt-5" to="/login">Login</Link>
+                    <div className="mb-3">
+                        <label required for="exampleInputPassword1" className="form-label">Password</label>
+                        <input required type="password" className="form-control" id="exampleInputPassword1" />
                     </div>
+                    <button type="submit" className="btn btn-primary">Register</button>
                 </div>
+
             </form>
+            <div>{errorMessage}</div>
+            <div className="justify-content-center">
+                <div className='d-block'>
+                    <p className="h3 pt-5">Already have an account? </p>
+                </div>
+                <div className='d-block'>
+                    <Link className="h3 pt-5" to="/login">Login</Link>
+                </div>
+            </div>
+
         </div>
     )
 
