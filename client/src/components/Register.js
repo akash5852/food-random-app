@@ -1,3 +1,4 @@
+//register component
 import { useLayoutEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import axios from "axios";

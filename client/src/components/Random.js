@@ -1,3 +1,4 @@
+//random meal component
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { useHistory } from 'react-router-dom'
