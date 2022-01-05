@@ -85,7 +85,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Ever have those days where you just can't decide on what to eat? This app is made for you. Being a university student who had to cook and decide on what to eat everyday, I needed to come up with a way that would solve that exact problem. I decided to create a full-stack app that generates meal ideas based on meal type. I also wanted it to be customizable, so I added the option to add and delete meals.
+Ever have those days where you just can't decide on what to eat? This app is made for you. Being a university student who had to cook and decide on what to eat everyday, I needed to come up with a way that would solve that exact problem. I decided to create a full-stack app that generates meal ideas based on meal type. I also wanted it to be customizable, so I added the option to add and delete meals with user authentication.
 
 ### Built With
 
