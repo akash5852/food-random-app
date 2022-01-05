@@ -14,7 +14,7 @@ const Register = () => {
             password: form[1].value
         }
         try {
-            const res = await axios.post("http://localhost:5000/register", user);
+            const res = await axios.post("https://food-random-app.herokuapp.com/register", user);
             let data = res.data;
 
             setErrorMessage(data.message);
@@ -50,11 +50,11 @@ const Register = () => {
             <form className="d-flex justify-content-center vw-100 " onSubmit={(e) => handleRegister(e)}>
                 <div className='mb-3'>
                     <div className="mb-3">
-                        <label required for="username" className="form-label">Username</label>
+                        <label required htmlFor="username" className="form-label">Username</label>
                         <input required className="form-control" id="username" aria-describedby="username" />
                     </div>
                     <div className="mb-3">
-                        <label required for="exampleInputPassword1" className="form-label">Password</label>
+                        <label required htmlFor="exampleInputPassword1" className="form-label">Password</label>
                         <input required type="password" className="form-control" id="exampleInputPassword1" />
                     </div>
                     <button type="submit" className="btn btn-primary">Register</button>

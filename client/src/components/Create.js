@@ -15,7 +15,7 @@ const CreateMeal = () => {
     const history = useHistory();
 
     useEffect(() => {
-        fetch("http://localhost:5000/isUserAuth", {
+        fetch("https://food-random-app.herokuapp.com/isUserAuth", {
             headers: {
                 "access-token": localStorage.getItem("token")
             }
