@@ -63,6 +63,7 @@ const Login = () => {
                     <div className='d-block'>
                         <p className="h3 pt-5">Don't have an account? </p>
                     </div>
+                    <div>{errorMessage}</div>
                     <div className='d-block'>
                         <Link className="h3 pt-5" to="/register">Register</Link>
                     </div>
