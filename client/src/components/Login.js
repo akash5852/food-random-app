@@ -18,7 +18,7 @@ const Login = () => {
             const res = await axios.post("http://localhost:5000/login", user);
             let data = res.data;
             console.log(data.message);
-            setErrorMessage(JSON.stringify(data.message));
+            setErrorMessage(data.message);
             localStorage.setItem("token", data.token);
             history.go(0);
 
@@ -55,7 +55,9 @@ const Login = () => {
                     <input required className="d-inline  m-2" type="password" name="password" id="password" />
                     <input className="m-1 px-2 py-1 " type="submit" value="Login" />
                 </div>
-
+                <div>
+            
+                </div>
                 <div className="justify-content-center">
                     <div className='d-block'>
                         <p className="h3 pt-5">Don't have an account? </p>

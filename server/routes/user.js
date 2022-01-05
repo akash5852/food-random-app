@@ -13,12 +13,14 @@ router.route("/register").post(async (req, res) => {
     }
     console.log(data);
 
-    var newUser = new User(data);
-    const userExists = await User.exists({ username: req.body.username, password: req.body.password });
+
+    const userExists = await User.exists({ username: req.body.username });
     if (userExists) {
         res.send("Sorry but this username has been taken");
         console.log("User exists");
     } else {
+        data.password = await bcrypt.hash(req.body.password, 10)
+        var newUser = new User(data);
         newUser.save((err) => {
             if (err) {
                 console.log("Something went wrong with adding that user");
@@ -40,41 +42,38 @@ router.route("/login").post(async (req, res) => {
         password: req.body.password
     }
 
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findOne({ username: data.username });
     if (user) {
-        let passcheck = false;
-        bcrypt.compare(user.password, data.password)
-        .then(isCorrect => {
-            passcheck = true;
-        })
-        if (passcheck = true) {
-            console.log("nice")
-            const payload = {
-                id: user._id,
-                username: user.username,
-            }
 
-            jwt.sign(
-                payload,
-                process.env.PASSPORTSECRET,
-                { expiresIn: 86400 },
-                (err, token) => {
-                    if (err) return res.json({ message: err })
+        let passcheck = false;
+        bcrypt.compare(data.password, user.password)
+            .then(isCorrect => {
+                if (isCorrect) {
+                    const payload = {
+                        id: user._id,
+                        username: user.username,
+                    }
+                    jwt.sign(
+                        payload,
+                        process.env.PASSPORTSECRET,
+                        { expiresIn: 86400 },
+                        (err, token) => {
+                            if (err) return res.json({ message: err })
+                            return res.json({
+                                message: 'Success',
+                                token: "Bearer " + token
+                            })
+                        }
+                    )
+                } else {
                     return res.json({
-                        message: 'Success',
-                        token: "Bearer " + token
+                        message: "Invalid Username or Password"
                     })
                 }
-            )
-        }else{
-            return res.json({
-                message: "Invalid Username or Password"
+
             })
-        }
-    } else {
-        return res.json({
-            message: "Invalid Username or Password"
-        })
+
+    
     }
 })
 
@@ -84,7 +83,7 @@ const verifyJWT = (req, res, next) => {
 
     if (token) {
         jwt.verify(token, process.env.PASSPORTSECRET, (err, decoded) => {
-            if (err) return res.json({isLoggedIn: false, message: "Failed To Authenticate"})
+            if (err) return res.json({ isLoggedIn: false, message: "Failed To Authenticate" })
             req.user = {};
             req.user.id = decoded.id
             req.user.username = decoded.username
@@ -92,17 +91,17 @@ const verifyJWT = (req, res, next) => {
             next()
         })
     } else {
-        res.json({message: "Incorrect Token Given", isLoggedIn: false})
+        res.json({ message: "Incorrect Token Given", isLoggedIn: false })
     }
 }
 
 router.get("/isUserAuth", verifyJWT, (req, res) => {
-    return res.json({isLoggedIn: true, username: req.user.username})
+    return res.json({ isLoggedIn: true, username: req.user.username })
 })
 
-router.route("/getUsername").get(async (req, res) =>{
-    verifyJWT(req,res);
-    res.json({isLoggedIn: true, username: req.user.username})
+router.route("/getUsername").get(async (req, res) => {
+    verifyJWT(req, res);
+    res.json({ isLoggedIn: true, username: req.user.username })
 })
 
 module.exports = router
