@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
-import { Link, Redirect, useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import axios from "axios";
 
 const Register = () => {

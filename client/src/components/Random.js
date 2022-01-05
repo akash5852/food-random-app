@@ -1,10 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useHistory, useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, {useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useHistory } from 'react-router-dom'
 import axios from "axios";
 import './Random.css';
 
 const RandomMeal = () => {
-  const history = useHistory;
+  const history = useHistory();
   const initialState = '';
   const [mealType, setmealType] = useState('');
   const [randomMeal, setMeal] = useState('');
@@ -13,14 +14,14 @@ const RandomMeal = () => {
 
   useLayoutEffect(() => {
     fetch("http://localhost:5000/isUserAuth", {
-      headers: {
-        "access-token": localStorage.getItem("token")
-      }
+        headers: {
+            "access-token": localStorage.getItem("token")
+        }
     })
-      .then(res => res.json())
-      .then(data => data.isLoggedIn ? null : history.push("/login"))
-      .catch(err => console.log(err))
-  }, [])
+        .then(res => res.json())
+        .then(data => data.isLoggedIn ?  null : history.push("/login"))
+        .catch(err => console.log(err))
+}, [])
 
   useEffect(() => {
     // Skipping the initial render. TODO: use a better solution from https://stackoverflow.com/questions/53179075/with-useeffect-how-can-i-skip-applying-an-effect-upon-the-initial-render
@@ -53,7 +54,7 @@ const RandomMeal = () => {
 
   const logout = () => {
     localStorage.removeItem("token")
-    history.push("/login")
+    history.push("login")
   }
 
   return (
