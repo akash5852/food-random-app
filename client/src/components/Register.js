@@ -21,8 +21,7 @@ const Register = () => {
 
             console.log(data.message);
             if (data.message === "User has been added") {
-                history.push("/login");
-                history.go(0);
+
             }
         } catch (e) {
             console.log(e);
