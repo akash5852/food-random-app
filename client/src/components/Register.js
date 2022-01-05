@@ -41,21 +41,22 @@ const Register = () => {
             <div className="h2 p-5  ">Register</div>
             <form className="mx-5 " onSubmit={(e) => handleRegister(e)}>
                 <div className='d-block'>
-                <label required className="d-inline  m-2" htmlFor="username">Username: </label>
-                <input required className="d-inline m-2" type="text" name="username" id="username" />
-                <label required className="d-inline m-2" htmlFor="password">Password: </label>
-                <input required  className="d-inline  m-2" type="password" name="password" id="password" />
-                <input className="m-1 px-2 py-1 " type="submit" value="Register" />
+                    <label required className="d-inline  m-2" htmlFor="username">Username: </label>
+                    <input required className="d-inline m-2" type="text" name="username" id="username" />
+                    <label required className="d-inline m-2" htmlFor="password">Password: </label>
+                    <input required className="d-inline  m-2" type="password" name="password" id="password" />
+                    <input className="m-1 px-2 py-1 " type="submit" value="Register" />
                 </div>
-               
+
                 <div className="justify-content-center">
-                <div className='d-block'>
-                    <p className = "h3 pt-5">Already have an account? </p>
+                    <div className='d-block'>
+                        <p className="h3 pt-5">Already have an account? </p>
                     </div>
                     <div className='d-block'>
-                    <Link className="h3 pt-5" to="/login">Login</Link>
+                        <Link className="h3 pt-5" to="/login">Login</Link>
                     </div>
-                </div>            </form>
+                </div>
+            </form>
         </div>
     )
 

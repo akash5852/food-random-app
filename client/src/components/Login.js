@@ -7,7 +7,7 @@ const Login = () => {
     const history = useHistory();
 
     const handleLogin = async (e) => {
-   
+
         e.preventDefault();
         const form = e.target;
         const user = {
@@ -26,7 +26,7 @@ const Login = () => {
         } catch (e) {
             console.log(e);
         }
-    
+
     }
 
     useEffect(() => {
@@ -46,20 +46,25 @@ const Login = () => {
 
     return (
         <div className="text-white flex flex-col h-screen w-screen items-center justify-center">
-            <div className="p-5 text-3xl font-extrabold">Login</div>
-            <form className="mx-5 flex flex-col w-72" onSubmit={(e) => handleLogin(e)}>
-                <label htmlFor="username">Username</label>
-                <input className="text-black m-3 border-2 border-green-400 p-1" type="text" name="username" id="username" />
-                <label htmlFor="password">Password</label>
-                <input className="text-black m-3 border-2 border-green-400 p-1" type="password" name="password" id="password" />
-                <input className="m-1 px-2 py-1 rounded font-bold text-xl bg-green-400 text-gray-900" type="submit" value="Login" />
-                <div className="flex flex-row items-center justify-center">
-                    <h1>Don't have an account?</h1>
-                    <Link className="m-1 px-2 py-1 rounded font-bold text-xl border-2 border-green-400 text-green-400 text-center" to="/register">Register</Link>
+            <div className="h2 p-5  ">Login</div>
+            <form className="mx-5 " onSubmit={(e) => handleLogin(e)}>
+                <div className='d-block'>
+                    <label required className="d-inline  m-2" htmlFor="username">Username: </label>
+                    <input required className="d-inline m-2" type="text" name="username" id="username" />
+                    <label required className="d-inline m-2" htmlFor="password">Password: </label>
+                    <input required className="d-inline  m-2" type="password" name="password" id="password" />
+                    <input className="m-1 px-2 py-1 " type="submit" value="Login" />
                 </div>
 
+                <div className="justify-content-center">
+                    <div className='d-block'>
+                        <p className="h3 pt-5">Don't have an account? </p>
+                    </div>
+                    <div className='d-block'>
+                        <Link className="h3 pt-5" to="/register">Register</Link>
+                    </div>
+                </div>
             </form>
-
         </div>
     )
 
