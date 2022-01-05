@@ -16,7 +16,9 @@ router.route("/register").post(async (req, res) => {
 
     const userExists = await User.exists({ username: req.body.username });
     if (userExists) {
-        res.send("Sorry but this username has been taken");
+        return res.json({
+            message: "Sorry but this username has been taken"
+        })
         console.log("User exists");
     } else {
         data.password = await bcrypt.hash(req.body.password, 10)
@@ -26,7 +28,9 @@ router.route("/register").post(async (req, res) => {
                 console.log("Something went wrong with adding that user");
             } else {
                 console.log("User added successfully");
-                res.send(`User has been added`);
+                return res.json({
+                    message: "User has been added"
+                })
             }
         });
     }

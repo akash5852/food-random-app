@@ -21,7 +21,7 @@ const RandomMeal = () => {
         .then(res => res.json())
         .then(data => data.isLoggedIn ?  null : history.push("/login"))
         .catch(err => console.log(err))
-}, [])
+}, [history])
 
   useEffect(() => {
     // Skipping the initial render. TODO: use a better solution from https://stackoverflow.com/questions/53179075/with-useeffect-how-can-i-skip-applying-an-effect-upon-the-initial-render

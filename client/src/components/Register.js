@@ -14,8 +14,16 @@ const Register = () => {
             password: form[1].value
         }
         try {
-            await axios.post("http://localhost:5000/register", user);
-
+            const res = await axios.post("http://localhost:5000/register", user);
+            let data = res.data;
+            
+            setErrorMessage(data.message);
+            
+            console.log(data.message);
+            if(data.message === "User has been added"){
+                history.push("/login");
+                history.go(0); 
+            }
         } catch (e) {
             console.log(e);
         }
@@ -30,7 +38,7 @@ const Register = () => {
         })
             .then(res => res.json())
             .then(data => data.isLoggedIn ? history.push("/") : null)
-            .catch(err => setErrorMessage(err))
+            .catch(err => console.log(err))
     }, [history])
 
 
@@ -47,7 +55,7 @@ const Register = () => {
                     <input required className="d-inline  m-2" type="password" name="password" id="password" />
                     <input className="m-1 px-2 py-1 " type="submit" value="Register" />
                 </div>
-
+                <div>{errorMessage}</div>
                 <div className="justify-content-center">
                     <div className='d-block'>
                         <p className="h3 pt-5">Already have an account? </p>

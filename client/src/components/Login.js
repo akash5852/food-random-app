@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Link, useHistory, Redirect } from 'react-router-dom'
+import { useLayoutEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom'
 import axios from "axios";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState("")
     const history = useHistory();
@@ -18,18 +18,19 @@ const Login = () => {
             const res = await axios.post("http://localhost:5000/login", user);
             let data = res.data;
             console.log(data.message);
-            setErrorMessage(data.message);
+            
             localStorage.setItem("token", data.token);
-            history.go(0);
-
-
+            setErrorMessage(data.message);
+            if(data.message === "Success"){
+                history.go(0); 
+            }
         } catch (e) {
             console.log(e);
         }
 
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         fetch("http://localhost:5000/isUserAuth", {
             headers: {
                 "access-token": localStorage.getItem("token")
@@ -38,7 +39,7 @@ const Login = () => {
             .then(res => res.json())
             .then(data => data.isLoggedIn ? history.push("/") : null)
             .catch(err => setErrorMessage(err))
-    }, [])
+    }, [history])
 
 
 
@@ -56,7 +57,7 @@ const Login = () => {
                     <input className="m-1 px-2 py-1 " type="submit" value="Login" />
                 </div>
                 <div>
-            
+            <div>{errorMessage}</div>
                 </div>
                 <div className="justify-content-center">
                     <div className='d-block'>

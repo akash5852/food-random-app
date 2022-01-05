@@ -1,5 +1,5 @@
 //Photo by <a href="https://unsplash.com/@moniqa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Monika Grabkowska</a> on <a href="https://unsplash.com/s/photos/food-photography?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-import React, { useLayoutEffect, useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -23,7 +23,7 @@ const CreateMeal = () => {
             .then(res => res.json())
             .then(data => data.isLoggedIn ? null : history.push("/login"))
             .catch(err => console.log(err))
-    }, [])
+    }, [history])
 
     useEffect(() => {
         // Skipping the initial render. TODO: use a better solution from https://stackoverflow.com/questions/53179075/with-useeffect-how-can-i-skip-applying-an-effect-upon-the-initial-render
