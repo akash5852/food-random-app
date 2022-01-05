@@ -26,8 +26,8 @@ class App extends Component {
               </div>
             </nav>
             <br />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />
             <Route path="/addMeal" component={CreateMeal} />
             <Route path="/" exact component={RandomMeal} />
           </div>
