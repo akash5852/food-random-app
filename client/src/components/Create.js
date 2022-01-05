@@ -1,20 +1,36 @@
 //Photo by <a href="https://unsplash.com/@moniqa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Monika Grabkowska</a> on <a href="https://unsplash.com/s/photos/food-photography?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useLayoutEffect, useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import './Random.css'
+
 const CreateMeal = () => {
     const initialState = '';
     const [mealType, setmealType] = useState('');
     const [submitted, setSubmitted] = useState('');
     const [mealName, setmealName] = useState('');
     const [task, setTask] = useState('');
-
     const updateNotificationRef = useRef();
+    const history = useHistory();
+
+    useLayoutEffect(() => {
+        fetch("http://localhost:5000/isUserAuth", {
+            headers: {
+                "access-token": localStorage.getItem("token")
+            }
+        })
+            .then(res => res.json())
+            .then(data => data.isLoggedIn ?  null : history.push("/login"))
+            .catch(err => console.log(err))
+    }, [])
 
     useEffect(() => {
         // Skipping the initial render. TODO: use a better solution from https://stackoverflow.com/questions/53179075/with-useeffect-how-can-i-skip-applying-an-effect-upon-the-initial-render
+        
+        
+        
         if (submitted === initialState) {
             return;
         }

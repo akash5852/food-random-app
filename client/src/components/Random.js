@@ -1,13 +1,26 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useHistory, useState, useEffect, useRef, useLayoutEffect } from 'react';
 import axios from "axios";
 import './Random.css';
 
 const RandomMeal = () => {
+  const history = useHistory;
   const initialState = '';
   const [mealType, setmealType] = useState('');
   const [randomMeal, setMeal] = useState('');
   const updateNotificationRef = useRef();
+
+
+  useLayoutEffect(() => {
+    fetch("http://localhost:5000/isUserAuth", {
+      headers: {
+        "access-token": localStorage.getItem("token")
+      }
+    })
+      .then(res => res.json())
+      .then(data => data.isLoggedIn ? null : history.push("/login"))
+      .catch(err => console.log(err))
+  }, [])
 
   useEffect(() => {
     // Skipping the initial render. TODO: use a better solution from https://stackoverflow.com/questions/53179075/with-useeffect-how-can-i-skip-applying-an-effect-upon-the-initial-render
@@ -38,6 +51,10 @@ const RandomMeal = () => {
 
   }
 
+  const logout = () => {
+    localStorage.removeItem("token")
+    history.push("/login")
+  }
 
   return (
     <div id="container" className="text-light" >
@@ -53,6 +70,9 @@ const RandomMeal = () => {
           <input type="submit" value="Dinner" className="m-3 btn btn-light btn-md" onClick={() => setmealType('Dinner')} />
         </form>
         <h1 ref={updateNotificationRef}>{randomMeal}</h1>
+        <form className="fixed-bottom" onSubmit={logout}>
+          <input type="submit" value="Logout" className="m-3 btn btn-light btn-md" />
+        </form>
       </div>
     </div>
   );

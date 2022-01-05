@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useHistory, Redirect } from 'react-router-dom'
 import axios from "axios";
 
@@ -6,28 +6,8 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState("")
     const history = useHistory();
 
-    const checkValid = async (token) => {
-        try {
-            const res = await axios.get("http://localhost:5000/isUserAuth", {
-                headers: {
-                    "access-token": token
-                }
-            });
-            console.log(JSON.stringify(res.data));
-            let data = res.data;
-            if(data.isLoggedIn){
-                history.push("/")
-            }else{
-                setErrorMessage(data.message)
-            }
-
-        } catch (e) {
-            console.log(e)
-        }
-
-    }
-
     const handleLogin = async (e) => {
+   
         e.preventDefault();
         const form = e.target;
         const user = {
@@ -40,19 +20,17 @@ const Login = () => {
             console.log(data.message);
             setErrorMessage(JSON.stringify(data.message));
             localStorage.setItem("token", data.token);
-            if (data.token) {
-                checkValid(localStorage.getItem("token"));
-            }
+            history.go(0);
 
 
         } catch (e) {
             console.log(e);
         }
-
+    
     }
 
-    useLayoutEffect(() => {
-        fetch("/isUserAuth", {
+    useEffect(() => {
+        fetch("http://localhost:5000/isUserAuth", {
             headers: {
                 "access-token": localStorage.getItem("token")
             }
@@ -60,13 +38,13 @@ const Login = () => {
             .then(res => res.json())
             .then(data => data.isLoggedIn ? history.push("/") : null)
             .catch(err => setErrorMessage(err))
-    }, [history])
+    }, [])
 
 
 
 
 
-    if()return (
+    return (
         <div className="text-white flex flex-col h-screen w-screen items-center justify-center">
             <div className="p-5 text-3xl font-extrabold">Login</div>
             <form className="mx-5 flex flex-col w-72" onSubmit={(e) => handleLogin(e)}>
